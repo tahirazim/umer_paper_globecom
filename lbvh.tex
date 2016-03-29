@@ -1,0 +1,63 @@
+\section{Overview}
+\label{sec:lbvh}
+
+Using the open-source 
+Sirikata system~\cite{ewencp2012} as a starting point, this paper
+optimizes the download and rendering cost of aggregates by exploiting
+content coherence. Two key
+algorithmic improvements enable this optimization:
+
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.5\textwidth]{fig/gat.pdf}
+%\caption{Sirikata's BVH}
+%\label{fig:gat}
+%\vspace{-8pt}
+%\end{figure}
+
+
+(A) \textbf{Grouping objects into aggregates based on visual similarity.}  
+Existing approaches group
+together objects in a BVH to optimize query performance and ignore the
+resulting mesh complexity or size of the BVH's internal nodes. 
+Many scenes have collections of very similar objects: trees grouped into a 
+forest, bricks forming a wall, and similar houses
+grouped into a suburb. As Figure \ref{fig:bvh_optimization} shows,
+considering the visual similarity of objects can lead to aggregates
+where highly similar objects can be replaced (or \emph{deduplicated}) 
+with one representative object
+instanced multiple times.  The resulting aggregate meshes can
+significantly reduce file size and rendering complexity.  Sections
+\ref{sec:bvhconstruction} and \ref{sec:generation} describe algorithms
+for constructing similarity-aware BVHs and similar mesh deduplication.
+
+(B) \textbf{Simplifying instanced meshes efficiently into small output
+  mesh files.} User-generated virtual worlds require an open 3D
+format, such as COLLADA. Most such formats describe the 3D model as an
+instanced mesh, where a model consists of a set of submeshes which are
+instantiated one or more times to create the overall mesh.  This
+reduces the download and memory cost for clients compared to an
+expanded version of the same mesh. It also encourages modification and
+reuse of meshes by users because they are easier to edit: changes to a
+submesh, such as a window on a house, are made across all instances.
+Aggregates can also increase instancing, because aggregates group
+similar objects together and represent them as instances of the same
+object.
+
+However, because quadric simplification requires all instances in the
+mesh to be expanded out into a single instance, it can drastically
+increase the file size of the resulting mesh. Results in
+Section~\ref{sec:eval}, for example, show that on instanced meshes,
+using existing simplification algorithms to reduce the number of triangles by 80\% 
+can double the file size. Section \ref{sec:simplification} presents an
+instance-aware simplification algorithm that strictly reduces file
+size as it simplifies a mesh. 
+
+%(C) \textbf{Reconfiguring aggregate meshes to better manage GPU
+%  texture resources.}  Combining many meshes into aggregates can
+%result in each aggregate having large numbers of seperate textures,
+%which becomes a GPU bottleneck since each texture requires a separate
+%draw call.  Section \ref{sec:textures} describes an approach towards
+%texture management that ensures each aggregate mesh has only a single draw call
+%for all of its textures.
+

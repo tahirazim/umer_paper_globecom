@@ -1,0 +1,85 @@
+
+% Packages
+
+\documentclass[conference]{IEEEtran}
+\usepackage{epsfig}
+
+\usepackage{graphicx}   % A package for graphics use (see figures)
+
+\usepackage{cite}
+
+\usepackage{booktabs}
+
+\usepackage{balance}  % for  \balance command ON LAST PAGE  (only there!)
+\usepackage{amsmath}
+\usepackage{xspace}
+\usepackage{subfigure}
+%\usepackage{bibspacing}
+\usepackage{url}
+
+
+\usepackage[algoruled,vlined,linesnumbered,commentsnumbered]{algorithm2e}
+
+
+\usepackage{comment}
+
+\newcommand{\inlineitem}[1]{\vspace{1ex}\noindent{\bf {#1}}}
+\newcommand{\closeinlineitem}{\vspace{1ex}}
+\newcommand{\specialcell}[2][c]{ \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\input{remark}
+\remarktrue
+
+\newcommand{\eg}{{\em e.g.}, }
+\newcommand{\ie}{{\em i.e.}, }
+\newcommand{\etal}{{\em et al.\ }}
+
+\pagestyle{empty}
+
+
+\begin{document}
+
+\title{Similarity-Based Encrypted Data Search in the Cloud}
+
+\author{\IEEEauthorblockN{Muhammad Umer\IEEEauthorrefmark{1},
+Tahir Azim\IEEEauthorrefmark{2} and
+Zeeshan Pervez\IEEEauthorrefmark{3}
+}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}
+National University of Sciences and Technology,\\
+Islamabad, Pakistan\\ Email: 13msitmumer@seecs.edu.pk}
+\IEEEauthorblockA{\IEEEauthorrefmark{2} \'{E}cole Polytechnique F\'{e}d\'{e}rale de Lausanne\\
+Lausanne, Switzerland\\
+Email: tahir.azim@epfl.ch}
+\IEEEauthorblockA{\IEEEauthorrefmark{3} University of the West of Scotland\\
+Paisley, Scotland PA1 2BE\\
+Email: zeeshan.pervez@uws.ac.uk} 
+}
+
+
+
+\maketitle
+
+\input{abstract}
+
+
+
+
+%% \terms
+%% Algorithms, Design, Experimentation, Performance
+
+%% \keywords
+%% Virtual worlds, Discovery, Spatial
+%\keywordlist
+
+\input{intro}
+\input{related}
+\input{system}
+\input{discussion}
+
+\bibliographystyle{IEEEbib}
+\bibliography{ias}
+
+
+
+\end{document}

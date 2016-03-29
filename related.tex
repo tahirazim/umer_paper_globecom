@@ -1,0 +1,71 @@
+\section{Related Work}
+\label{sec:related}
+
+Traditionally, confidential information is protected using access control
+mechanisms. This mechanism only works if confidential information is present on
+a fully secure, trusted server. But this assumption fails when confidential 
+information is outsourced to remote servers in the cloud.
+
+Although cloud service providers (CSP) allow data to be encrypted in order to 
+secure it, encryption leads to a couple of problems. First, searching for 
+keywords within data encrypted using popular encryption algorithms is not
+possible. Second, if you provide the CSP the decryption keys in order to make
+search possible, you cannot prevent the CSP from accessing the confidential 
+data.
+
+Recent work has focused on solving these problems using a variety of techniques.
+These techniques can be broadly classified into two categories.
+
+\textbf{Using Trapdoor Encryption.}
+Song et al. \cite{song} proposed a symmetric key based
+searchable scheme for encrypted data. Each keyword in the document was encrypted independently
+using trapdoors. Their approach proposed ways to search encrypted data using both an
+encrypted index as well as searching the original data itself. 
+Goh\cite{goh2003secure} proposed encrypted search using bloom filters. They generate trapdoors
+against all the keywords in a file and add them to a bloom filter. In this way, for
+each file, a single bloom filter is created using trapdoors and stored in
+the cloud. To search, a user computes the trapdoor for a keyword and sends it to the cloud
+server. The cloud server checks the trapdoor in the bloom filter, and if
+it exists, returns the corresponding file identifier. 
+Waters et al. \cite{waters2004building} extended the work of Song et al. and proposed a similar
+technique to secure audit logs. Audit logs contain sensitive information about a series of
+events, actions and actors who are responsible for triggering particular event
+or performing an action. Therefore encryption is required for its confidentiality.
+When it needs to be searched, a trusted third party issues a trapdoor
+for a specific keyword search. All of the above schemes support only
+exact keyword matches and rely on trapdoors.
+
+Boneh et al \cite{boneh}
+presented the first public key based searchable scheme which enables authorized users having 
+the private key to search in the index. This approach still
+used trapdoors based indexing and supported only exact keyword matching.
+
+Yu et al. \cite{li} proposed a scheme on encrypted Personal Health Records
+(PHR) by using Hierarchical Predicate Encryption (HPE). They also used a 
+trusted third party for the distribution of trapdoors. 
+Authorized users obtained trapdoors from the trusted third party and then 
+submitted them to the CSP for evaluation. This scheme is limited because only 
+predefined trapdoors can be used and users cannot model their own queries.
+
+Pal et al. \cite{saibal} proposed an encrypted search scheme using bloom filters. They
+also used soundex coding\cite{odell1918soundex} for each word to search words
+which are pronounced similarly. This work is complementary to our work. However, it
+does not make an effort to reduce the communication cost of returning results to the
+client. Kuzu et al.\cite{mehmat} introduced a similarity-based encrypted search scheme,
+which used locality sensitive hashing for the similarity score calculation.
+This scheme also used trapdoors, hence leaking private matching information
+upon which statistical attacks are possible. 
+
+
+\textbf{Using Homomorphic Encryption.}
+Zeeshan et al.\cite{zeehan} proposed an inverted index based encrypted data search scheme.
+They used homomorphic encryption~\cite{craig} to provide end-to-end privacy. Only
+authorized users can execute queries using their personal proxy re-encryption keys in
+order to manipulate the index. They used a trusted third party for the ranking of searched results and
+query modelling. While this approach does not rely on trapdoors, it still supports only
+exact keyword matching.
+
+Finally, CryptDB~\cite{popa2011cryptdb} and MONOMI~\cite{tu2013processing} improve the performance of searching over encrypted data using
+a split client/server querying paradigm. Employing several forms of encryption including
+symmetric, public-key and homomorphic encryption, they improve querying performance by orders
+of magnitude. However, in doing so, they are vulnerable to several kinds of information leakage to various extents.

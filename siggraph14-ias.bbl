@@ -1,0 +1,92 @@
+\begin{thebibliography}{10}
+
+\bibitem{craig}
+Craig Gentry,
+\newblock ``{{Fully Homomorphic Encryption Using Ideal Lattices}},''
+  https://www.cs.cmu.edu/~odonnell/hits09/gentry-homomorphic-encryption.pdf,
+  2009.
+
+\bibitem{song}
+Dawn~Xiaodong Song, David Wagner, and Adrian Perrig,
+\newblock ``Practical techniques for searches on encrypted data,''
+\newblock in {\em Security and Privacy, 2000. S\&P 2000. Proceedings. 2000 IEEE
+  Symposium on}. IEEE, 2000, pp. 44--55.
+
+\bibitem{goh2003secure}
+Eu-Jin Goh et~al.,
+\newblock ``Secure indexes.,''
+\newblock {\em IACR Cryptology ePrint Archive}, vol. 2003, pp. 216, 2003.
+
+\bibitem{waters2004building}
+Brent~R Waters, Dirk Balfanz, Glenn Durfee, and Diana~K Smetters,
+\newblock ``Building an encrypted and searchable audit log.,''
+\newblock in {\em NDSS}, 2004, vol.~4, pp. 5--6.
+
+\bibitem{boneh}
+Dan Boneh, Giovanni Di~Crescenzo, Rafail Ostrovsky, and Giuseppe Persiano,
+\newblock ``Public key encryption with keyword search,''
+\newblock in {\em Advances in Cryptology-Eurocrypt 2004}. Springer, 2004, pp.
+  506--522.
+
+\bibitem{li}
+Shucheng Yu, Cong Wang, Kui Ren, and Wenjing Lou,
+\newblock ``Achieving secure, scalable, and fine-grained data access control in
+  cloud computing,''
+\newblock in {\em Infocom, 2010 proceedings IEEE}. Ieee, 2010, pp. 1--9.
+
+\bibitem{saibal}
+Sankar~K Pal, Puneet Sardana, and Ankita Sardana,
+\newblock ``Efficient search on encrypted data using bloom filter,''
+\newblock in {\em Computing for Sustainable Global Development (INDIACom), 2014
+  International Conference on}. IEEE, 2014, pp. 412--416.
+
+\bibitem{odell1918soundex}
+M~Odell and RC~Russell,
+\newblock ``The soundex coding system,''
+\newblock {\em US Patents}, vol. 1261167, 1918.
+
+\bibitem{mehmat}
+Mehmet Kuzu, Mohammad~Saiful Islam, and Murat Kantarcioglu,
+\newblock ``Efficient similarity search over encrypted data,''
+\newblock in {\em Data Engineering (ICDE), 2012 IEEE 28th International
+  Conference on}. IEEE, 2012, pp. 1156--1167.
+
+\bibitem{zeehan}
+Zeeshan Pervez, Ammar~Ahmad Awan, Asad~Masood Khattak, Sungyoung Lee, and
+  Eui-Nam Huh,
+\newblock ``Privacy-aware searching with oblivious term matching for cloud
+  storage,''
+\newblock {\em The Journal of Supercomputing}, vol. 63, no. 2, pp. 538--560,
+  2013.
+
+\bibitem{popa2011cryptdb}
+Raluca~Ada Popa, Catherine Redfield, Nickolai Zeldovich, and Hari Balakrishnan,
+\newblock ``Cryptdb: protecting confidentiality with encrypted query
+  processing,''
+\newblock in {\em Proceedings of the Twenty-Third ACM Symposium on Operating
+  Systems Principles}. ACM, 2011, pp. 85--100.
+
+\bibitem{tu2013processing}
+Stephen Tu, M~Frans Kaashoek, Samuel Madden, and Nickolai Zeldovich,
+\newblock ``Processing analytical queries over encrypted data,''
+\newblock in {\em Proceedings of the VLDB Endowment}. VLDB Endowment, 2013,
+  vol.~6, pp. 289--300.
+
+\bibitem{pascal}
+Pascal Paillier,
+\newblock ``Public key cryptosystems based on composite degree residuosity
+  classes,''
+\newblock in {\em 17th international conference on theory and application of
+  cryptographic techniques}. Springer, 1999, p. 223–238.
+
+\bibitem{porter}
+Martin Porter,
+\newblock ``{The Porter Stemming Algorithm},''
+  \url{http://tartarus.org/martin/PorterStemmer/}.
+
+\bibitem{hadoop}
+Tom White,
+\newblock {\em Hadoop: The definitive guide},
+\newblock " O'Reilly Media, Inc.", 2012.
+
+\end{thebibliography}

@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: siggraph14-ias.aux
+The style file: IEEEbib.bst
+Database file #1: ias.bib
+Warning--can't use both volume and number fields in tu2013processing
+You've used 15 entries,
+            1838 wiz_defined-function locations,
+            676 strings with 8208 characters,
+and the built_in function-call counts, 4360 in all, are:
+= -- 427
+> -- 152
+< -- 11
++ -- 57
+- -- 42
+* -- 279
+:= -- 608
+add.period$ -- 23
+call.type$ -- 15
+change.case$ -- 14
+chr.to.int$ -- 0
+cite$ -- 16
+duplicate$ -- 228
+empty$ -- 435
+format.name$ -- 42
+if$ -- 1059
+int.to.chr$ -- 0
+int.to.str$ -- 15
+missing$ -- 14
+newline$ -- 76
+num.names$ -- 15
+pop$ -- 73
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 142
+stack$ -- 0
+substring$ -- 267
+swap$ -- 104
+text.length$ -- 11
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 43
+width$ -- 17
+write$ -- 173
+(There was 1 warning)
