@@ -52,7 +52,7 @@ of list of keywords from data \\\hline
 \vspace*{\fill} \centering $\sigma_{pk}$ , $\sigma_{sk}$ & Homomorphic
     encryption public and private keys \\\hline
 \vspace*{\fill} \centering$\mathcal{K}_S$ & Symmetric encryption and
-    decryption key. It is used to encrypted index file name \\\hline
+    decryption keys. It is used to encrypt the data file. \\\hline
 \vspace*{\fill} \centering$\mathcal{S}_q$ & Similarity score of a query
 \\\hline
 \vspace*{\fill} \centering$\mathcal{R}_q$ & Compressed resultant term
@@ -61,10 +61,6 @@ of list of keywords from data \\\hline
 \\\hline
 \vspace*{\fill} \centering$\mathcal{T}_b$ , $\mathcal{O}_b$ & Number of 2s
 and 1ns in a resultant term \\\hline
-\vspace*{\fill}   \centering $\mathcal{BF}_1,\mathcal{BF}_2, \ldots,
-\mathcal{BF}_n$ & Variables of a polynomial $\mathcal{P}$ where $n$ is the length of the bloom filter \\\hline
-\vspace*{\fill} \centering $3^1, 3^2, \ldots, 3^{n-1}$ &  Coefficients of a
- polynomial $\mathcal{P}$ where $n$ is the length of the bloom filter \\\hline
 \end{tabular}
 \end{center}
 \caption{ Notations used in mathematical and descriptive details  }
@@ -141,12 +137,16 @@ the structure:
 \end{equation} 
 where $\mathcal{O}_b$ is the number of 1's in the bloom filter.
 
+Once the encrypted index file has been generated, it is uploaded to the cloud along with the data files.
+The data files are encrypted using a symmetric encryption algorithm, as they will not be used during the
+search process.
+
 \subsection{Search Process}
 
 To start the search process, the user first generates a query through a similar process as index creation. 
 Each of the user's specified keywords are used to generate sliding window bloom filters, whose bits are then
 encrypted using the public key $\sigma_{pk}$ of the Pascal Paillier algorithm. 
-Note that this while process takes place on the end user's machine. After encryption, 
+Note that this process takes place on the end user's machine. After encryption, 
 the query (comprising the encrypted bloom filters) is sent to the cloud for terms matching.
 
 On receiving a query, the CSP will match the incoming query with the index entries of 
@@ -190,7 +190,8 @@ define a polynomial $\mathcal{P}$ given by Equation \ref{eq: polynomial}.
 3^2\cdot\mathcal{BF}_3 + \ldots + 3^{n-1}\cdot\mathcal{BF}_n
   \label{eq: polynomial}
 \end{equation}
-where $\mathcal{BF}_i$ represent variables for
+where $\mathcal{BF}_i$  are the Paillier sums of the corresponding bits
+of an index entry and represent variables for
 the polynomial $\mathcal{P}$ and $\mathcal{BF}_i \in \langle 0,1,2 \rangle $.
 
 The sum of this polynomial $\mathcal{P}$ is the resultant compressed term which we return back
@@ -198,13 +199,10 @@ to client application:
 
 \begin{equation}
 \mathcal{R}_q = \sum_{i=1}^{n} 3^{i-1}\cdot\mathcal{BF}_i
-\label{eq: compressed}
+\label{eq:compressed}
 \end{equation}
 
-In this equation, $\mathcal{BF}_i$ are the Paillier sums of the corresponding bits
-of an index entry and the
-query and $3^{i-1}$ are constants. From Eq.\ref{eq:
-compressed} we get a single compressed term $\mathcal{R}_q$ and its size will be
+From Eq.\ref{eq:compressed} we get a single compressed term $\mathcal{R}_q$ and its size will be
 the size of Pascal Paillier key size. This multiplication by constants and addition is again possible 
 because our bloom filter bits are encrypted using Pascal Paillier homomorphic
 encryption. Therefore, if after decryption, we want the product of the plaintext with a constant, we
@@ -214,8 +212,7 @@ This means that irrespective of the size
 of the bloom filter,
 we will always return a single number back to the client. The client can then
 decompress it to find out the original Paillier sums using the routine
-specified in Algorithm \ref{algo:decomp}. We omit the proof of correctness of the
-algorithm in the interest of space.
+specified in Algorithm \ref{algo:decomp}. This algorithm works by 
 
 \begin{algorithm}
 \KwIn{A compressed index entry $\mathcal{R}_q$}
@@ -223,9 +220,9 @@ algorithm in the interest of space.
 $ b \gets 3 $ \;
 $i \gets 0 $\;
 \While{$\mathcal{R}_q > 0$}{
-  $\mathcal{M}_q [i] \gets \log_b \mathcal{R}_q$ \;
+  $i \gets \log_b \mathcal{R}_q$ \;
   $\mathcal{R}_q \gets \mathcal{R}_q - b^{i}$ \;
-  $i \gets i + 1$ \;
+  $\mathcal{M}_q [i] \gets \mathcal{M}_q [i] + 1 $ \;
 }\Return{$\mathcal{M}_q$}\;
  \caption{Index entry decompression}
  \label{algo:decomp}

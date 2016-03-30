@@ -13,10 +13,11 @@ This paper addresses the problem of similarity-based search over
 outsourced encrypted data while ensuring end-to-end privacy. This enables users
 to search using keywords that only partially match the originally stored words.
 We implement partial matching using sliding window bloom filters and secure
-search over arbitrary keywords using homomorphic encryption. Crucially, by 
+search over arbitrary keywords using homomorphic encryption. We further optimize
+this process by 
 avoiding the need to send back the entire encrypted bloom filter index to the 
-client, we reduce the cost of communicating results to the client by over 95\%.
+client. This reduces the cost of communicating results to the client by over 95\%.
 Our results demonstrate that search queries with 2 to 10 keywords
-only cost \$0.00001 to \$0.00004 per 1000 similar requests.
+only cost \$0.000002 to \$0.00002 per 1000 similar requests.
 
 \end{abstract}
