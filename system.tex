@@ -198,7 +198,7 @@ The sum of this polynomial $\mathcal{P}$ is the resultant compressed term which 
 to client application:
 
 \begin{equation}
-\mathcal{R}_q = \sum_{i=1}^{n} 3^{i-1}\cdot\mathcal{BF}_i
+\mathcal{R}_q = \sum_{i=0}^{n-1} 3^{i}\cdot\mathcal{BF}_i
 \label{eq:compressed}
 \end{equation}
 
@@ -212,7 +212,10 @@ This means that irrespective of the size
 of the bloom filter,
 we will always return a single number back to the client. The client can then
 decompress it to find out the original Paillier sums using the routine
-specified in Algorithm \ref{algo:decomp}. This algorithm works by 
+specified in Algorithm \ref{algo:decomp}. In short, this algorithm works correctly because every
+$\mathcal{BF}_i$ is at most 2 and $ 3^{n} > 2\sum_{j=0}^{n-1} 3^{j}$ . This means
+that taking $log_3 \mathcal{R}_q$ repeatedly will yield the position of the next
+bloom filter bit that needs to be incremented.
 
 \begin{algorithm}
 \KwIn{A compressed index entry $\mathcal{R}_q$}

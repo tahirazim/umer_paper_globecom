@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  30 MAR 2016 12:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  30 MAR 2016 13:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -410,10 +410,10 @@ File: figures/indexing_encryption_time.png Graphic file (type png)
 
 <use figures/indexing_encryption_time.png>
 Package pdftex.def Info: figures/indexing_encryption_time.png used on input lin
-e 260.
+e 263.
 (pdftex.def)             Requested size: 252.94499pt x 142.27908pt.
 
-Overfull \hbox (0.94499pt too wide) in paragraph at lines 260--261
+Overfull \hbox (0.94499pt too wide) in paragraph at lines 263--264
  [][] 
  []
 
@@ -424,7 +424,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: figures/index_time_graph.png Graphic file (type png)
 
 <use figures/index_time_graph.png>
-Package pdftex.def Info: figures/index_time_graph.png used on input line 273.
+Package pdftex.def Info: figures/index_time_graph.png used on input line 276.
 (pdftex.def)             Requested size: 216.81pt x 126.92165pt.
 
 <figures/paillier_index_size_graph.png, id=27, 638.385pt x 361.35pt>
@@ -432,17 +432,17 @@ File: figures/paillier_index_size_graph.png Graphic file (type png)
 
 <use figures/paillier_index_size_graph.png>
 Package pdftex.def Info: figures/paillier_index_size_graph.png used on input li
-ne 285.
+ne 288.
 (pdftex.def)             Requested size: 216.81pt x 122.71953pt.
  [4]
 <figures/comp_compare.png, id=33, 644.6484pt x 391.2216pt>
 File: figures/comp_compare.png Graphic file (type png)
 
 <use figures/comp_compare.png>
-Package pdftex.def Info: figures/comp_compare.png used on input line 302.
+Package pdftex.def Info: figures/comp_compare.png used on input line 305.
 (pdftex.def)             Requested size: 252.94499pt x 153.50705pt.
 
-Overfull \hbox (0.94499pt too wide) in paragraph at lines 302--303
+Overfull \hbox (0.94499pt too wide) in paragraph at lines 305--306
  [][] 
  []
 
@@ -453,11 +453,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: figures/cost_keywords_graph.png Graphic file (type png)
 
 <use figures/cost_keywords_graph.png>
-Package pdftex.def Info: figures/cost_keywords_graph.png used on input line 345
+Package pdftex.def Info: figures/cost_keywords_graph.png used on input line 348
 .
 (pdftex.def)             Requested size: 260.17244pt x 157.4749pt.
 
-Overfull \hbox (8.17244pt too wide) in paragraph at lines 345--346
+Overfull \hbox (8.17244pt too wide) in paragraph at lines 348--349
  [][] 
  []
 
@@ -509,7 +509,7 @@ sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr
 live/2015/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2015
 /texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dis
 t/fonts/type1/urw/times/utmri8a.pfb>
-Output written on siggraph14-ias.pdf (6 pages, 482326 bytes).
+Output written on siggraph14-ias.pdf (6 pages, 482981 bytes).
 PDF statistics:
  91 PDF objects out of 1000 (max. 8388607)
  58 compressed objects within 1 object stream
