@@ -84,6 +84,11 @@ Martin Porter,
 \newblock ``{The Porter Stemming Algorithm},''
   \url{http://tartarus.org/martin/PorterStemmer/}.
 
+\bibitem{google_cloud_logs}
+Google Inc.,
+\newblock ``{Google Cloud Platform: Reading and Writing Application Logs},''
+  \url{https://cloud.google.com/appengine/docs/python/logs/#understanding_request_log_fields}.
+
 \bibitem{hadoop}
 Tom White,
 \newblock {\em Hadoop: The definitive guide},

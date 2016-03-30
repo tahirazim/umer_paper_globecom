@@ -55,9 +55,9 @@ of list of keywords from data \\\hline
     decryption keys. It is used to encrypt the data file. \\\hline
 \vspace*{\fill} \centering$\mathcal{S}_q$ & Similarity score of a query
 \\\hline
-\vspace*{\fill} \centering$\mathcal{R}_q$ & Compressed resultant term
+\vspace*{\fill} \centering$\mathcal{R}_q$ & Compressed resultant term after bloom filter matching
 \\\hline
-\vspace*{\fill} \centering$\mathcal{M}_q$ & Compressed resultant term
+\vspace*{\fill} \centering$\mathcal{M}_q$ & Uncompressed resultant term after bloom filter matching
 \\\hline
 \vspace*{\fill} \centering$\mathcal{T}_b$ , $\mathcal{O}_b$ & Number of 2s
 and 1ns in a resultant term \\\hline
@@ -307,6 +307,11 @@ bloom filter increases. This is shown in Figure \ref{fig:compress}.
   \label{fig:compress}
 \end{figure}
 
+We also measure the time it takes to extract the matching bloom filter values
+from the compressed responses.
+Table \ref{tab:search_response_time} show the results. As expected, 
+the extraction time increases linearly with the keyword count
+on the server.
 
 \begin{table}[th!]
 \centering
@@ -327,21 +332,18 @@ Keyword Count & Response Time (ms) \\
 
 \end{table}
 
-We also measure search performance in terms of response time to a search query. 
-Table \ref{tab:search_response_time} show the results. As keyword count on the
-server increases, the response time increases only linearly showing that our
-approach scales reasonably well.
 
-\subsection{Cost Estimation}
+\subsection{Cost Estimation and Response Times}
 
 Finally, we evaluate the cost(\$) that CSP will charge to data owners for search
 queries. Our results, shown in Figure \ref{fig:cost_single_query}, demonstrate that a query
 searching for a single keyword in a dataset having 500-3500 index entries will cost only \$0.000002 to \$0.00002 per 1000 similar
 queries. Furthermore, all of these metrics increase linearly with number of index entries.
 We obtained this cost from Google App Engine logs for each data point. In
-each log entry \emph{ms}, \emph{cpu\_ms} and \emph{cpm\_usd} depicts response
-time, number of clock cycles used by CPU to process the request, and cost(\$)
-incurred for 1000 similar requests.
+each log entry \emph{ms}, \emph{cpu\_ms} and \emph{cpm\_usd} depicts the wallclock response
+time for a request, the ``normalized" CPU time needed to process the request, and cost(\$)
+incurred for 1000 similar requests~\cite{google_cloud_logs}.
+
 
 \begin{figure}
   \centering
