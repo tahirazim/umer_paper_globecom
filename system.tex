@@ -157,7 +157,7 @@ same plaintext repeatedly results in completely different ciphertexts, which imp
 privacy and security but makes matching difficult.
 
 Fortunately, homomorphic encryption provides a way to perform mathematical operations 
-over ciphertext. Since our bloom filter bits are encrypted using Pascal Paillier homomorphic
+over ciphertext. Since our bloom filter entries are encrypted using Pascal Paillier homomorphic
 encryption, we can just multiply their ciphertexts, which when decrypted, would yield the sum of
 the plaintexts~\cite{pascal}. The sum of the bits will be either $0$,$1$ or $2$ after decryption.
 The twos in the decrypted output then represent the matched
@@ -204,7 +204,7 @@ to client application:
 
 From Eq.\ref{eq:compressed} we get a single compressed term $\mathcal{R}_q$ and its size will be
 the size of Pascal Paillier key size. This multiplication by constants and addition is again possible 
-because our bloom filter bits are encrypted using Pascal Paillier homomorphic
+because our bloom filter entries are encrypted using Pascal Paillier homomorphic
 encryption. Therefore, if after decryption, we want the product of the plaintext with a constant, we
 just need to exponentiate the ciphertext by that constant~\cite{pascal}.
 
@@ -215,7 +215,7 @@ decompress it to find out the original Paillier sums using the routine
 specified in Algorithm \ref{algo:decomp}. In short, this algorithm works correctly because every
 $\mathcal{BF}_i$ is at most 2 and $ 3^{n} > 2\sum_{j=0}^{n-1} 3^{j}$ . This means
 that taking $log_3 \mathcal{R}_q$ repeatedly will yield the position of the next
-bloom filter bit that needs to be incremented.
+bloom filter entry that needs to be incremented.
 
 \begin{algorithm}
 \KwIn{A compressed index entry $\mathcal{R}_q$}
