@@ -4,16 +4,22 @@ Consumer data, such as documents, photos and videos, are increasingly being
 stored in the cloud. To ensure confidentiality of the data, it is outsourced
 after encryption. However, this makes it difficult to search the encrypted data directly. Recent approaches to enable searching of this encrypted data
 have relied on trapdoors, locally stored indexes, and homomorphic encryption.
-However, data communication cost for these techniques are very high and they limit search capabilities either to a small set of 
+However, data communication cost for these techniques is very high and 
+they limit search capabilities either to a small set of 
 pre-defined trapdoors or only allow exact keyword matching.
 
-This paper addresses the problem of high communication cost of privacy-aware search which make use of bloom filters to measure the similarity score between search query and encrypted data. We have proposed a novel compression algorithm by 
-avoiding the need to send back the entire encrypted bloom filter index to the 
-client. This reduces the cost of communicating results to the client by over 95\%. Our scheme enables users to search using keywords that only partially match the originally stored words.
-We implement partial matching using sliding window bloom filters and secure
-search over arbitrary keywords using homomorphic encryption.
-To demonstrate viability of our scheme we implement it on a real cloud, Google
-ecosystem, and our results show that search queries with 2 to 10 keywords only
-cost \$0.000002 to \$0.00002 per 1000 similar requests.
+This paper addresses the problem of high communication cost of privacy-aware 
+search which use bloom filters to measure the similarity score between the
+search query and the encrypted data. We propose a novel compression 
+algorithm which avoids the need to send the entire encrypted bloom filter 
+index back to 
+the client. This reduces the cost of communicating results to the client by 
+over 95\%. Using sliding window bloom filters and homomorphic encryption
+also enables our system to search using keywords that 
+only partially match the originally stored words.
+We demonstrate the viability of our system by implementing it on
+Google Cloud, and our results show that the cost of partially matching
+search queries on encrypted data scales only linearly with the total number of 
+keywords stored on the server. 
 
 \end{abstract}

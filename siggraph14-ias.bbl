@@ -12,12 +12,6 @@ Cloud~Security Alliance,
   \url{https://cloudsecurityalliance.org/download/the-treacherous-twelve-cloud-computing-top-threats-in-2016/},
   2012.
 
-\bibitem{craig}
-Craig Gentry,
-\newblock ``{{Fully Homomorphic Encryption Using Ideal Lattices}},''
-  https://www.cs.cmu.edu/~odonnell/hits09/gentry-homomorphic-encryption.pdf,
-  2009.
-
 \bibitem{song}
 Dawn~Xiaodong Song, David Wagner, and Adrian Perrig,
 \newblock ``Practical techniques for searches on encrypted data,''
@@ -29,16 +23,30 @@ Eu-Jin Goh et~al.,
 \newblock ``Secure indexes.,''
 \newblock {\em IACR Cryptology ePrint Archive}, vol. 2003, pp. 216, 2003.
 
-\bibitem{waters2004building}
-Brent~R Waters, Dirk Balfanz, Glenn Durfee, and Diana~K Smetters,
-\newblock ``Building an encrypted and searchable audit log.,''
-\newblock in {\em NDSS}, 2004, vol.~4, pp. 5--6.
-
 \bibitem{boneh}
 Dan Boneh, Giovanni Di~Crescenzo, Rafail Ostrovsky, and Giuseppe Persiano,
 \newblock ``Public key encryption with keyword search,''
 \newblock in {\em Advances in Cryptology-Eurocrypt 2004}. Springer, 2004, pp.
   506--522.
+
+\bibitem{craig}
+Craig Gentry,
+\newblock ``{{Fully Homomorphic Encryption Using Ideal Lattices}},''
+  https://www.cs.cmu.edu/~odonnell/hits09/gentry-homomorphic-encryption.pdf,
+  2009.
+
+\bibitem{zeehan}
+Zeeshan Pervez, Ammar~Ahmad Awan, Asad~Masood Khattak, Sungyoung Lee, and
+  Eui-Nam Huh,
+\newblock ``Privacy-aware searching with oblivious term matching for cloud
+  storage,''
+\newblock {\em The Journal of Supercomputing}, vol. 63, no. 2, pp. 538--560,
+  2013.
+
+\bibitem{waters2004building}
+Brent~R Waters, Dirk Balfanz, Glenn Durfee, and Diana~K Smetters,
+\newblock ``Building an encrypted and searchable audit log.,''
+\newblock in {\em NDSS}, 2004, vol.~4, pp. 5--6.
 
 \bibitem{li}
 Shucheng Yu, Cong Wang, Kui Ren, and Wenjing Lou,
@@ -62,14 +70,6 @@ Mehmet Kuzu, Mohammad~Saiful Islam, and Murat Kantarcioglu,
 \newblock ``Efficient similarity search over encrypted data,''
 \newblock in {\em Data Engineering (ICDE), 2012 IEEE 28th International
   Conference on}. IEEE, 2012, pp. 1156--1167.
-
-\bibitem{zeehan}
-Zeeshan Pervez, Ammar~Ahmad Awan, Asad~Masood Khattak, Sungyoung Lee, and
-  Eui-Nam Huh,
-\newblock ``Privacy-aware searching with oblivious term matching for cloud
-  storage,''
-\newblock {\em The Journal of Supercomputing}, vol. 63, no. 2, pp. 538--560,
-  2013.
 
 \bibitem{popa2011cryptdb}
 Raluca~Ada Popa, Catherine Redfield, Nickolai Zeldovich, and Hari Balakrishnan,

@@ -17,28 +17,30 @@ records are other examples of user data whose privacy needs to be ensured.
 The straightforward way to achieve data protection and confidentiality is to
 place data on the cloud after encrypting it using public key encryption.
 This solves the confidentiality and privacy problem
-but encryption hides data information and searching becomes difficult. The user
-has to download all the data from cloud storage and search it after decrypting it locally. This is
+but encryption hides information within the data and searching becomes difficult. The user
+has to download all of the data from cloud storage and search it after decrypting it locally. This is
 obviously an extremely expensive proposition. Therefore we need a mechanism 
 which can enable a user to search over the encrypted data without revealing 
 private information and without downloading excessive data over the network.
 
 Existing approaches for searching over encrypted data often rely on
-"trapdoors". Trapdoors enable a user to search the encrypted data for a small 
+``trapdoors"~\cite{song,goh2003secure,boneh}. 
+Trapdoors enable a user to search the encrypted data for a small 
 set of pre-defined keywords. These approaches restrict the searching
 capability of a user to a limited number of trapdoors defined during data 
-encryption. More recent work has focused on homomorphic encryption~\cite{craig} as a solution
+encryption. More recent work has focused on homomorphic encryption~\cite{craig,zeehan} as a solution
 to this problem. However, to ensure privacy from CSP, all the evaluated results
-are returned from cloud server without any compression causinging high data
-communication cost and naively allows searching for exact keyword matches over the encrypted data.
+are returned from the cloud server in encrypted form without any compression. This causes high data
+communication cost but naively allows searching for exact keyword matches over the encrypted data.
 
 In this paper, we present a novel system for performing searches on encrypted 
-data in the cloud. We proposed a novel compression technique which allows us to
+data in the cloud. We propose a novel compression technique which allows us to
 avoid sending back the entire encrypted index back to the client. This reduces the cost of
 communicating search results back to the client by over 95\% resulting in 
-faster response times and less budgeting cost (\$) to the owner. In addition to exact keyword matching, our system also
+faster response times and less budgeting cost (\$) to the owner. 
+In addition to exact keyword matching, our system also
 supports similarity-based searching: finding documents with partially matching 
-keywords rather than only those with exact keywords. Privacy and search 
+keywords rather than only those with exactly matching ones. Privacy and search 
 capabilities are enabled using homomorphic encryption, while sliding window 
 bloom filters allow us to search for partially matching keywords. 
 
@@ -47,6 +49,5 @@ related work in more detail.
 Section \ref{sec:system} presents a detailed description of our system and the 
 algorithms it uses.
 Section \ref{sec:eval} demonstrates the benefits of using our approaches
-on a dataset of encrypted textual data. Section \ref{sec:futurework} describes
-our future work to extend this research. Section \ref{sec:conclusion} then concludes
-with a treatment of some implications and trade-offs of using our system.
+on a dataset of encrypted textual data. Finally, sections \ref{sec:futurework} and 
+\ref{sec:conclusion} conclude with a treatment of some limitations and trade-offs of our system.

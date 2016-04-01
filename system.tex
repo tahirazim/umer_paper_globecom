@@ -1,38 +1,7 @@
 \section{Proposed System}
 \label{sec:system}
 
-Before diving into a description of how the system
-is designed and implemented, we first discuss some of our assumptions
-about the system and the threat model. Then we will discuss the main
-steps involved in searching encrypted data, the initial index generation
-and then the actual search process.
-
-\subsection{System Model}
-
-Entities involved in the proposed system are the data owner, CSP and end user.
-Data owner is an entity who wants its confidential data to be stored in cloud storage with the capability of privacy-aware searching. 
-A cloud service provider (CSP) hosts public cloud storage services for its subscribers on 
-a pay-as-you-use model. The end user is an entity who will perform searches on the 
-encrypted data stored on the cloud server. The end user can submit search queries 
-to the CSP, which evaluates the queries and returns results back to the user. 
-Meanwhile during query evaluation, CSP should not be able to learn anything about the query, stored 
-data and matching results.
-
-\subsection{Threat Model}
-
-The data owner and end user are considered as trusted entities while CSP 
-is considered as a untrusted entity because it is maintained by an 
-arbitrary third party. Data communication between end user and CSP should 
-be considered as non-trusted as all requests are routed via the open Internet. 
-The CSP hosts the encrypted data file ($\mathcal{F}$) and the encrypted index ($\mathcal{I}$). 
-As they are encrypted, the CSP cannot learn any information regarding $\mathcal{F}$ and $\mathcal{I}$. 
-Query evaluation is done by CSP homomorphically: that is, the CSP performs 
-evaluation over encrypted text of $\mathcal{I}$ and encrypted user query, 
-so it is neither able to learn anything about the matched results, nor
-can it relate any subsequent queries from other users. 
-
-
-\begin{table*}[t!]
+\begin{table*}[h!]
 \caption{ Notations used in mathematical and descriptive details  }
 \label{tab:notations}
 \begin{center}\begin{tabular}{{ |l |l |l }}
@@ -68,9 +37,39 @@ of list of keywords from data \\\hline
 \end{table*}
 
 
+Before diving into a description of how the system
+is designed and implemented, we first discuss some of our assumptions
+about the system and the threat model. Then we will discuss the main
+steps involved in searching encrypted data, the initial index generation
+and then the actual search process.
+
+\subsection{System Model}
+
+Entities involved in the proposed system are the data owner, cloud service provider (CSP) and end user.
+A data owner is an entity who wants its confidential data to be stored in cloud storage with the capability of privacy-aware searching. 
+A CSP hosts public cloud storage services for its subscribers on 
+a pay-as-you-use model. The end user is an entity who will perform searches on the 
+encrypted data stored on the cloud server. The end user can submit search queries 
+to the CSP, which evaluates the queries and returns results back to the user. 
+Meanwhile during query evaluation, the CSP should not be able to learn anything about the query, 
+the stored data and the matching results.
+
+\subsection{Threat Model}
+
+The data owner and end user are considered trusted entities while CSP 
+is considered as an untrusted entity because it is maintained by an 
+arbitrary third party. Data communication between the end user and CSP should 
+be considered as untrusted as all requests are routed via the open Internet. 
+The CSP hosts the encrypted data file ($\mathcal{F}$) and the encrypted index ($\mathcal{I}$). 
+As they are encrypted, the CSP cannot learn any information regarding $\mathcal{F}$ and $\mathcal{I}$. 
+Query evaluation is done by CSP homomorphically: that is, the CSP performs 
+evaluation over encrypted text of $\mathcal{I}$ and encrypted user query, 
+so it is neither able to learn anything about the matched results, nor
+can it relate any subsequent queries from other users. 
+
 \subsection{Assumptions and Notations}
 
-We ignore key exchange mechanism between the data owner, CSP and the end user, assuming
+We ignore the key exchange mechanism between the data owner and the end users, assuming
 that it happens using secure out-of-band channels.
 Table \ref{tab:notations} illustrates the notations that we use in order to explain
 the details of our proposed approach.
@@ -91,7 +90,7 @@ window size, a keyword is mapped to the bloom filter. For example, suppose we ha
 independently mapped to the bloom filter. This filter enables us to achieve
  a high matching score even if the requested keyword does not match completely.
 
-\begin{algorithm}
+\begin{algorithm}[b!]
 \KwIn{A collection of text files $C = \langle \mathcal{F}_1, \mathcal{F}_2, \ldots,
 \mathcal{F}_n \rangle$}
 \KwOut{Index files $I = \langle \mathcal{I}_1, \mathcal{I}_2, \ldots,
@@ -161,19 +160,19 @@ over ciphertext. Since our bloom filter entries are encrypted using Pascal Paill
 encryption, we can just multiply their ciphertexts, which when decrypted, would yield the sum of
 the plaintexts~\cite{pascal}. The sum of the bits will be either $0$,$1$ or $2$ after decryption.
 The twos in the decrypted output then represent the matched
-bits and the ones represent the unmatched bits. Then, a measure of the similarity
+bits and the ones represent the unmatched bits. Then, a similarity score
 can be estimated as the ratio of twos to ones in the decrypted result.
 
 Note that decryption of this result will require users to have the private Pascal 
-Paillier key. Thus only authorized users who have received the private key from the
+Paillier key. Thus, only authorized users who have received the private key from the
 data owner can actually decrypt the results.
 
 \subsection{Compressing Search Results}
 
 Once the encrypted index entries and query have been added together, 
-we can simply return their sums back to the client. The client can then decrypt the
+we can simply return the sums back to the client. The client can then decrypt the
 sums and compute similarity scores. While this straightforward approach works and
-is used by many existing systems for example in~\cite{zeehan}, it is extremely
+is used by many existing systems (for example, in ~\cite{zeehan}), it is extremely
 inefficient.
 In particular, if there are many documents and keywords in the cloud dataset, this
 will result in a huge amount of data to be communicated back to the user. In quantitative terms,
@@ -203,8 +202,9 @@ to client application:
 \label{eq:compressed}
 \end{equation}
 
-From Eq.\ref{eq:compressed} we get a single compressed term $\mathcal{R}_q$ and its size will be
-the size of Pascal Paillier key size. This multiplication by constants and addition is again possible 
+From Eq.\ref{eq:compressed} we get a single compressed term $\mathcal{R}_q$ whose size is
+the size of the Pascal Paillier key size. 
+This multiplication by constants and addition is again possible 
 because our bloom filter entries are encrypted using Pascal Paillier homomorphic
 encryption. Therefore, if after decryption, we want the product of the plaintext with a constant, we
 just need to exponentiate the ciphertext by that constant~\cite{pascal}.
@@ -241,16 +241,19 @@ size of the Paillier key, namely 64 bits. So the total data returned will be
 $64*1000/8 = 8KB$, a saving of over 95\%.
 
 
-\section{Results}
+\section{Evaluation}
 \label{sec:eval}
-We choose a real cloud environment. Google cloud ecosystem, to demonstrated the
-viability of our proposed scheme. We implement an indexer, a searching and a
-client application as standard Java services. Searching application is deployed
-on Google App Engine configured as F4 class instance with a 2.4 GHz CPU and 512
-MB of RAM. We utilized Google Blobstore for hosting of index files. We preferred
-Blobstore over datastore as datastore has certain limitations like it’s one
-entity can hold only few bytes of data and with the increase index entries it’s
-read/write operations can be more costly while in Blobstore we can store our complete index file and can access it in searching application so it provides more scalability.
+
+We demonstrate the viability of our proposed scheme using a real cloud environment, Google Cloud.
+We implement an indexing service, a search service and a
+client application as standard Java services. The search service was deployed
+on Google App Engine configured as an F4 class instance with a 2.4 GHz CPU and 512
+MB of RAM. We utilized Google Blobstore for hosting index files because
+it allows us to store and retrieve the complete index file efficiently.
+This is in contrast to Google Datastore whose
+entities can hold only a few bytes of data. As a result, when index entries increase,
+read/write operations on index entries in the Datastore become more costly.
+
 We evaluate the results of our approach on a dataset of 150 documents. 
 These documents range in size from 5 MB to 100 MB, containing from 5000 to
 129,000 keywords. The keywords were chosen to be at least 8 characters in
@@ -262,7 +265,8 @@ CPU and 8 GB of RAM.
 Figure \ref{fig:Index-Generation-Time} shows execution time for the index creation
 and encryption 
 processes over different input dataset sizes 
-using a 64-bit Pascal Paillier key and a 3 KB bloom filter. The graph shows that
+using a 64-bit Pascal Paillier key and a 3 KB bloom filter. The graph shows that,
+despite using sliding window bloom filters, 
 both encryption and index creation sizes increase linearly with input dataset size.
 
 \begin{figure}[h!]
@@ -273,9 +277,10 @@ both encryption and index creation sizes increase linearly with input dataset si
 \end{figure}
 
 Paillier key size and bloom filter size both have a substantial impact on index file size. 
-With the increase of bloom filter size, the size of each
-index entry will increase, which will result in a larger overall index file
-size. The increase in indexing time with increasing bloom filter size 
+With the increase of bloom filter size, the false positive rate decreases but the size of each
+index entry increases. The indexing time also increases, mainly because it takes longer
+to upload a larger bloom filter to the cloud. 
+This increase in indexing time with increasing bloom filter size 
 is shown in Figure \ref{fig: bf-size-exe-time}
 
  \begin{figure}
@@ -316,9 +321,11 @@ of the bloom filter increases. This is shown in Figure \ref{fig:compress}.
 
 We also measure the time it takes to extract the matching bloom filter values
 from the compressed responses.
-Table \ref{tab:search_response_time} show the results. As expected, 
+Table \ref{tab:search_response_time} show the results. As expected,
 the extraction time increases linearly with the keyword count
-on the server.
+on the server. The reason is that we add more keywords
+keywords by adding more documents to the dataset and each document
+has its own bloom filter index associated with it.
 
 \begin{table}[th!]
 \centering
@@ -341,13 +348,19 @@ Keyword Count & Response Extraction Time (ms) \\
 \end{table}
 
 
-\subsection{Cost Estimation and Response Times}
+\subsubsection{Cost Estimation and Response Times}
 
 Finally, we evaluate the cost(\$) that CSP will charge to data owners for search
-queries. Our results, shown in Figure \ref{fig:cost_single_query}, demonstrate that a query
+queries with partial matching. 
+Our results, shown in Figure \ref{fig:cost_single_query}, demonstrate that a query
 searching for a single keyword in a dataset having 500-3500 index entries will cost only \$0.000002 to \$0.00002 per 1000 similar
-queries. Furthermore, all of these metrics increase linearly with number of index entries.
-We obtained this cost from Google App Engine logs for each data point. In
+queries. Due to the sliding window bloom filter approach, 
+all of the metrics increase only linearly ($O(n)$) with the number
+of keywords on the server. This is substantially better than using a naive algorithm 
+for partial matching, which would result in $O(nm)$ time complexity 
+for $n$ keywords that are on average $m$ characters long.
+
+We obtained these cost metrics from Google App Engine logs for each data point. In
 each log entry \emph{ms}, \emph{cpu\_ms} and \emph{cpm\_usd} depicts the wallclock response
 time for a request, the \emph{normalized} CPU time needed to process the
 request, and cost(\$) incurred for 1000 similar requests~\cite{google_cloud_logs}.
