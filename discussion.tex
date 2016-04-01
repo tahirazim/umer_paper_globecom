@@ -1,28 +1,28 @@
 \section{Future Work}
+\label{sec:futurework}
 
 While homomorphic encryption allows us to implement this system effectively, 
 it is still much slower than symmetric and public-key encryption.
 In this paper, we have demonstrated and tested our system with a comparatively 
 small dataset. With larger amounts of data, the indexer will likely take 
 much more time to generate the
-encrypted index. One approach to handle this could be to use partition the
-dataset and use scalable systems like Hadoop~\cite{hadoop} for indexing
+encrypted index. To optimize indexing time we can
+utilize scalable systems like Hadoop~\cite{hadoop} for indexing
 purposes. In addition, it would be useful to explore CryptDB and MONOMI as
-ways to improve the performance of both the indexer and the searcher, while
-sacrificing privacy to a minimal extent.
+ways to improve the performance of both the indexer and the searcher.
 
 
 \section{Conclusion}
 \label{sec:conclusion}
 
 In this paper, we presented a privacy-aware similarity-based searching scheme
-over encrypted data residing in an untrusted cloud domain. By using homomorphic 
-encryption for index files, a cloud service provider can not learn the contents of 
+with reduced communication cost over encrypted data residing in an untrusted
+cloud domain. Using a novel compression 
+algorithm, our system avoids the need to send the bloom filter based index back to the 
+user, reducing communication costs by over 95\%.
+By using homomorphic encryption for index files, a cloud service provider can not learn the contents of 
 the data files, the index files or the search queries. Furthermore, it cannot 
 discern patterns from incoming queries. Moreover, unlike most existing techniques, our
 proposed system supports similarity-based searching in addition to exact matching.
 Since our system does not rely on trapdoors, it allows end users to formulate
-arbitrary queries and perform search. Finally, using a novel compression 
-algorithm, our system avoids the need to send the bloom filter based index back to the 
-user, reducing communication costs by over 95\%.
-
+arbitrary queries and perform search. 

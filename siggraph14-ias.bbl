@@ -1,5 +1,17 @@
 \begin{thebibliography}{10}
 
+\bibitem{wang2012toward}
+Cong Wang, Qian Wang, Kui Ren, Ning Cao, and Wenjing Lou,
+\newblock ``Toward secure and dependable storage services in cloud computing,''
+\newblock {\em Services Computing, IEEE Transactions on}, vol. 5, no. 2, pp.
+  220--232, 2012.
+
+\bibitem{top_threats}
+Cloud~Security Alliance,
+\newblock ``{The Treacherous Twelve¿ Cloud Computing Top Threats in 2016},''
+  \url{https://cloudsecurityalliance.org/download/the-treacherous-twelve-cloud-computing-top-threats-in-2016/},
+  2012.
+
 \bibitem{craig}
 Craig Gentry,
 \newblock ``{{Fully Homomorphic Encryption Using Ideal Lattices}},''

@@ -1,50 +1,52 @@
 \section{Introduction}
 
-Cloud computing enables its subcscribers to use computing services over the 
+Cloud computing enables its subscribers to use computing services over the 
 Internet and provides tailored computing resources on-demand. 
 Subscribers of cloud storage can outsource their data on public cloud servers
 without worrying about the availability and
-reliability of the data. It is then the cloud service provider's (CSP) 
+reliability of the data~\cite{wang2012toward}. It is then the cloud service provider's (CSP) 
 responsibility to coordinate data backup, synchronization and sharing
 with relevant stakeholders. 
 
 As the amount of data stored on the cloud increases dramatically, the security 
-of this data has become an important concern. Recent cases have included users'
-photos and videos getting stolen from compromised cloud servers resulting in
+of this data has become an important concern. Recent cases~\cite{top_threats}
+have included users' photos and videos getting stolen from compromised cloud servers resulting in
 severe breaches of privacy. Credit card numbers, dates of birth and medical
 records are other examples of user data whose privacy needs to be ensured.
 
-The straightforward way to achieve data protection, confidentiality and privacy is to place data on the cloud after encrypting it using public key encryption. 
+The straightforward way to achieve data protection and confidentiality is to
+place data on the cloud after encrypting it using public key encryption.
 This solves the confidentiality and privacy problem
-but searching on encrypted data becomes a problem. The user has to download all
-the data from cloud storage and search it after decrypting it locally. This is
+but encryption hides data information and searching becomes difficult. The user
+has to download all the data from cloud storage and search it after decrypting it locally. This is
 obviously an extremely expensive proposition. Therefore we need a mechanism 
 which can enable a user to search over the encrypted data without revealing 
 private information and without downloading excessive data over the network.
 
-Existing approaches for searching ovedddr encrypted data often rely on so-called
+Existing approaches for searching over encrypted data often rely on
 "trapdoors". Trapdoors enable a user to search the encrypted data for a small 
 set of pre-defined keywords. These approaches restrict the searching
 capability of a user to a limited number of trapdoors defined during data 
 encryption. More recent work has focused on homomorphic encryption~\cite{craig} as a solution
-to this problem. However, homomorphic encryption used naively only allows
-searching for exact keyword matches over the encrypted data. 
+to this problem. However, to ensure privacy from CSP, all the evaluated results
+are returned from cloud server without any compression causinging high data
+communication cost and naively allows searching for exact keyword matches over the encrypted data.
 
 In this paper, we present a novel system for performing searches on encrypted 
-data in the cloud. In addition to exact keyword matching, our system also
+data in the cloud. We proposed a novel compression technique which allows us to
+avoid sending back the entire encrypted index back to the client. This reduces the cost of
+communicating search results back to the client by over 95\% resulting in 
+faster response times and less budgeting cost (\$) to the owner. In addition to exact keyword matching, our system also
 supports similarity-based searching: finding documents with partially matching 
 keywords rather than only those with exact keywords. Privacy and search 
 capabilities are enabled using homomorphic encryption, while sliding window 
-bloom filters allow us to search for partially matching keywords. Finally, we
-use a novel compression technique which allows us to avoid sending back the
-entire encrypted index back to the client. This reduces the cost of
-communicating search results back to the client by over 95\% resulting in 
-faster response times.
+bloom filters allow us to search for partially matching keywords. 
 
-The next section overviews related work in more detail.  Section
-\ref{sec:system} presents a detailed description of our system and the 
+The rest of the paper is organized as follows. The next section overviews
+related work in more detail.
+Section \ref{sec:system} presents a detailed description of our system and the 
 algorithms it uses.
 Section \ref{sec:eval} demonstrates the benefits of using our approaches
-on a dataset of encrypted textual data. 
-Section \ref{sec:conclusion} then concludes with a treatment of
-some implications and trade-offs of using our system.
+on a dataset of encrypted textual data. Section \ref{sec:futurework} describes
+our future work to extend this research. Section \ref{sec:conclusion} then concludes
+with a treatment of some implications and trade-offs of using our system.

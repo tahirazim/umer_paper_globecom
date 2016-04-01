@@ -1,17 +1,16 @@
-\section{System Design and Implementation}
+\section{Proposed System}
 \label{sec:system}
 
 Before diving into a description of how the system
 is designed and implemented, we first discuss some of our assumptions
-about the system and the threat model. Then we will discuss the two main
+about the system and the threat model. Then we will discuss the main
 steps involved in searching encrypted data, the initial index generation
 and then the actual search process.
 
 \subsection{System Model}
 
-Entities involved in the proposed system are the data owner, cloud service 
-provider and end user. Data owner is an entity who wants its confidential 
-data to be stored in cloud storage with the capability of privacy-aware searching. 
+Entities involved in the proposed system are the data owner, CSP and end user.
+Data owner is an entity who wants its confidential data to be stored in cloud storage with the capability of privacy-aware searching. 
 A cloud service provider (CSP) hosts public cloud storage services for its subscribers on 
 a pay-as-you-use model. The end user is an entity who will perform searches on the 
 encrypted data stored on the cloud server. The end user can submit search queries 
@@ -22,18 +21,20 @@ data and matching results.
 \subsection{Threat Model}
 
 The data owner and end user are considered as trusted entities while CSP 
-is considered as a non-trusted entity because it is maintained by an 
+is considered as a untrusted entity because it is maintained by an 
 arbitrary third party. Data communication between end user and CSP should 
 be considered as non-trusted as all requests are routed via the open Internet. 
-The CSP hosts the encrypted data file F and the encrypted index I. 
-As they are encrypted, the CSP cannot learn any information regarding F and I. 
+The CSP hosts the encrypted data file ($\mathcal{F}$) and the encrypted index ($\mathcal{I}$). 
+As they are encrypted, the CSP cannot learn any information regarding $\mathcal{F}$ and $\mathcal{I}$. 
 Query evaluation is done by CSP homomorphically: that is, the CSP performs 
-evaluation over encrypted text of I and encrypted user query, 
+evaluation over encrypted text of $\mathcal{I}$ and encrypted user query, 
 so it is neither able to learn anything about the matched results, nor
 can it relate any subsequent queries from other users. 
 
 
 \begin{table*}[t!]
+\caption{ Notations used in mathematical and descriptive details  }
+\label{tab:notations}
 \begin{center}\begin{tabular}{{ |l |l |l }}
     \hline
     Notation & Description\\
@@ -59,12 +60,11 @@ of list of keywords from data \\\hline
 \\\hline
 \vspace*{\fill} \centering$\mathcal{M}_q$ & Uncompressed resultant term after bloom filter matching
 \\\hline
-\vspace*{\fill} \centering$\mathcal{T}_b$ , $\mathcal{O}_b$ & Number of 2s
-and 1ns in a resultant term \\\hline
+\vspace*{\fill} \centering $\mathcal{O}_b$ & Number of 1ns in a bloom filter
+\\\hline
 \end{tabular}
 \end{center}
-\caption{ Notations used in mathematical and descriptive details  }
-\label{tab:notations}
+
 \end{table*}
 
 
@@ -173,8 +173,9 @@ data owner can actually decrypt the results.
 Once the encrypted index entries and query have been added together, 
 we can simply return their sums back to the client. The client can then decrypt the
 sums and compute similarity scores. While this straightforward approach works and
-is used by many existing systems~\cite{zeehan}, it is extremely inefficient. In
-particular, if there are many documents and keywords in the cloud dataset, this
+is used by many existing systems for example in~\cite{zeehan}, it is extremely
+inefficient.
+In particular, if there are many documents and keywords in the cloud dataset, this
 will result in a huge amount of data to be communicated back to the user. In quantitative terms,
 the summed index entry for \textit{all} keywords in the dataset will be returned
 to the client. This will not only increase the response time over the network, but
@@ -242,14 +243,20 @@ $64*1000/8 = 8KB$, a saving of over 95\%.
 
 \section{Results}
 \label{sec:eval}
-
-We now evaluate the results of our approach on a dataset of 150 documents. 
+We choose a real cloud environment. Google cloud ecosystem, to demonstrated the
+viability of our proposed scheme. We implement an indexer, a searching and a
+client application as standard Java services. Searching application is deployed
+on Google App Engine configured as F4 class instance with a 2.4 GHz CPU and 512
+MB of RAM. We utilized Google Blobstore for hosting of index files. We preferred
+Blobstore over datastore as datastore has certain limitations like it’s one
+entity can hold only few bytes of data and with the increase index entries it’s
+read/write operations can be more costly while in Blobstore we can store our complete index file and can access it in searching application so it provides more scalability.
+We evaluate the results of our approach on a dataset of 150 documents. 
 These documents range in size from 5 MB to 100 MB, containing from 5000 to
 129,000 keywords. The keywords were chosen to be at least 8 characters in
 length and Porter stemming~\cite{porter} was applied to those keywords.
 The client was a Lenovo Thinkpad 430 with a 2.6 GHz Intel Core(TM) i5-332M
-CPU and 8 GB of RAM. The server was a Google App Engine B4 class instance
-with a 2.4 GHz CPU and 512 MB of RAM.
+CPU and 8 GB of RAM.
 
 \subsection{Indexing Performance}
 Figure \ref{fig:Index-Generation-Time} shows execution time for the index creation
@@ -297,8 +304,8 @@ time, CPU cycles used to process a search request and the cost(\$) CSP will
 charge for search queries. 
 For private term matching and data returned, our implementation demonstrates
 that by using our compression algorithm, data returned to the client
-is 96\% less than traditional approaches and remains constant even when the size of the 
-bloom filter increases. This is shown in Figure \ref{fig:compress}.
+is 95\% less than traditional approaches and remains constant even when the size
+of the bloom filter increases. This is shown in Figure \ref{fig:compress}.
 
 \begin{figure}[h!]
   \centering
@@ -315,9 +322,11 @@ on the server.
 
 \begin{table}[th!]
 \centering
+\caption{Response time increases almost linearly with keyword count.}
+\label{tab:search_response_time}
 \begin{tabular}{| c | c | }
 \hline
-Keyword Count & Response Time (ms) \\
+Keyword Count & Response Extraction Time (ms) \\
 \hline
 500  &  60 \\
 1000 &  125 \\
@@ -327,8 +336,7 @@ Keyword Count & Response Time (ms) \\
 3000 &  370 \\
 \hline
 \end{tabular}
-\caption{Response time increases almost linearly with keyword count.}
-\label{tab:search_response_time}
+
 
 \end{table}
 
@@ -341,8 +349,8 @@ searching for a single keyword in a dataset having 500-3500 index entries will c
 queries. Furthermore, all of these metrics increase linearly with number of index entries.
 We obtained this cost from Google App Engine logs for each data point. In
 each log entry \emph{ms}, \emph{cpu\_ms} and \emph{cpm\_usd} depicts the wallclock response
-time for a request, the ``normalized" CPU time needed to process the request, and cost(\$)
-incurred for 1000 similar requests~\cite{google_cloud_logs}.
+time for a request, the \emph{normalized} CPU time needed to process the
+request, and cost(\$) incurred for 1000 similar requests~\cite{google_cloud_logs}.
 
 
 \begin{figure}

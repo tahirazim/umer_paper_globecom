@@ -61,9 +61,9 @@ upon which statistical attacks are possible.
 Zeeshan et al.\cite{zeehan} proposed an inverted index based encrypted data search scheme.
 They used homomorphic encryption~\cite{craig} to provide end-to-end privacy. Only
 authorized users can execute queries using their personal proxy re-encryption keys in
-order to manipulate the index. They used a trusted third party for the ranking of searched results and
-query modelling. While this approach does not rely on trapdoors, it still supports only
-exact keyword matching.
+order to manipulate the index so a lot of computation being done due to index
+transformations. They used a trusted third party for the ranking of searched results and query modelling. While this approach does not rely on trapdoors, it still supports only
+exact keyword matching and causing high communication cost.
 
 Finally, CryptDB~\cite{popa2011cryptdb} and MONOMI~\cite{tu2013processing} improve the performance of searching over encrypted data using
 a split client/server querying paradigm. Employing several forms of encryption including
