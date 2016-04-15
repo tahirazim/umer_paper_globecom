@@ -58,15 +58,25 @@ upon which statistical attacks are possible.
 
 
 \textbf{Using Homomorphic Encryption.}
-Zeeshan et al.\cite{zeehan} proposed an inverted index based encrypted data search scheme.
+Homomorphic encryption is an encryption technique that
+allows computations to be carried out on ciphertext, thus generating an 
+encrypted result, which when decrypted, matches the result of operations performed 
+on the plaintext. An example of homomorphic encryption is the Pascal Paillier 
+cryptosystem~\cite{pascal}, which provides two useful properties: 
+(i) the product of two ciphertexts will decrypt to the sum of their corresponding plaintexts
+and (ii) a ciphertext raised to a constant $k$ will decrypt to the product of the 
+corresponding plaintext and the constant.
+
+Zeeshan et al.~\cite{zeehan} proposed an encrypted data search scheme using an nverted index.
 They used homomorphic encryption~\cite{craig} to provide end-to-end privacy. Only
-authorized users can execute queries using their personal proxy re-encryption keys in
+authorized users could execute queries using their personal proxy re-encryption keys in
 order to manipulate the index, so a lot of computation is done due to index
-transformations. They used a trusted third party for the ranking of searched results and query 
-modelling. While this approach does not rely on trapdoors, it still supports only
+transformations. They used a trusted third party to rank search results and model queries.
+While this approach avoids using trapdoors, it still supports only
 exact keyword matching and has high communication cost.
 
 Finally, CryptDB~\cite{popa2011cryptdb} and MONOMI~\cite{tu2013processing} improve the performance of searching over encrypted data using
 a split client/server querying paradigm. By employing several forms of encryption including
 symmetric, public-key and homomorphic encryption, they improve querying performance by orders
-of magnitude. However, in doing so, they are vulnerable to several kinds of information leakage to various extents.
+of magnitude. However, in doing so, they are vulnerable to several kinds of information leakage 
+but with low probability.

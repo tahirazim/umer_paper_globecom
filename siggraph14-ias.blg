@@ -3,46 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: siggraph14-ias.aux
 The style file: IEEEbib.bst
 Database file #1: ias.bib
+Warning--empty year in song
 Warning--can't use both volume and number fields in tu2013processing
 You've used 18 entries,
             1838 wiz_defined-function locations,
-            689 strings with 8786 characters,
-and the built_in function-call counts, 4895 in all, are:
-= -- 474
-> -- 177
-< -- 11
-+ -- 67
-- -- 49
-* -- 315
-:= -- 693
-add.period$ -- 26
+            682 strings with 8685 characters,
+and the built_in function-call counts, 4055 in all, are:
+= -- 350
+> -- 181
+< -- 5
++ -- 68
+- -- 50
+* -- 271
+:= -- 620
+add.period$ -- 25
 call.type$ -- 18
 change.case$ -- 17
 chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 246
-empty$ -- 494
-format.name$ -- 49
-if$ -- 1179
+cite$ -- 20
+duplicate$ -- 203
+empty$ -- 442
+format.name$ -- 50
+if$ -- 949
 int.to.chr$ -- 0
 int.to.str$ -- 18
-missing$ -- 15
-newline$ -- 89
+missing$ -- 16
+newline$ -- 90
 num.names$ -- 18
-pop$ -- 85
+pop$ -- 92
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 153
+skip$ -- 84
 stack$ -- 0
-substring$ -- 292
-swap$ -- 107
-text.length$ -- 11
+substring$ -- 155
+swap$ -- 58
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 48
+warning$ -- 2
+while$ -- 32
 width$ -- 20
-write$ -- 203
-(There was 1 warning)
+write$ -- 195
+(There were 2 warnings)

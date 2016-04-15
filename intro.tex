@@ -2,16 +2,16 @@
 
 Cloud computing enables its subscribers to use computing services over the 
 Internet and provides tailored computing resources on-demand. 
-Subscribers of cloud storage can outsource their data on public cloud servers
-without worrying about the availability and
-reliability of the data~\cite{wang2012toward}. It is then the cloud service provider's (CSP) 
+Subscribers of cloud storage often outsource their data on public cloud servers
+to ensure that it is highly available and reliabile~\cite{wang2012toward}. 
+It is then the cloud service provider's
 responsibility to coordinate data backup, synchronization and sharing
 with relevant stakeholders. 
 
 As the amount of data stored on the cloud increases dramatically, the security 
 of this data has become an important concern. Recent cases~\cite{top_threats}
 have included users' photos and videos getting stolen from compromised cloud servers resulting in
-severe breaches of privacy. Credit card numbers, dates of birth and medical
+severe breaches of privacy. Credit card numbers and medical
 records are other examples of user data whose privacy needs to be ensured.
 
 The straightforward way to achieve data protection and confidentiality is to
@@ -29,7 +29,8 @@ Trapdoors enable a user to search the encrypted data for a small
 set of pre-defined keywords. These approaches restrict the searching
 capability of a user to a limited number of trapdoors defined during data 
 encryption. More recent work has focused on homomorphic encryption~\cite{craig,zeehan} as a solution
-to this problem. However, to ensure privacy from CSP, all the evaluated results
+to this problem. However, to ensure privacy from the cloud service provider (CSP), 
+all the evaluated results
 are returned from the cloud server in encrypted form without any compression. This causes high data
 communication cost but naively allows searching for exact keyword matches over the encrypted data.
 

@@ -38,21 +38,21 @@ of list of keywords from data \\\hline
 
 
 Before diving into a description of how the system
-is designed and implemented, we first discuss some of our assumptions
-about the system and the threat model. Then we will discuss the main
-steps involved in searching encrypted data, the initial index generation
-and then the actual search process.
+is designed and implemented, we discuss some of our assumptions
+about the system and the threat model. Then we will describe the main
+steps involved in the initial index generation
+and then the actual search process over encrypted data.
 
 \subsection{System Model}
 
 Entities involved in the proposed system are the data owner, cloud service provider (CSP) and end user.
 A data owner is an entity who wants its confidential data to be stored in cloud storage with the capability of privacy-aware searching. 
 A CSP hosts public cloud storage services for its subscribers on 
-a pay-as-you-use model. The end user is an entity who will perform searches on the 
-encrypted data stored on the cloud server. The end user can submit search queries 
+a pay-as-you-use model. The end user is an entity that will perform searches on the 
+encrypted data stored in the cloud. The end user can submit search queries 
 to the CSP, which evaluates the queries and returns results back to the user. 
-Meanwhile during query evaluation, the CSP should not be able to learn anything about the query, 
-the stored data and the matching results.
+However, during query evaluation, the CSP should not be able to learn anything about the query, 
+the stored data or the matching results.
 
 \subsection{Threat Model}
 
@@ -148,7 +148,7 @@ encrypted using the public key $\sigma_{pk}$ of the Pascal Paillier algorithm.
 Note that this process takes place on the end user's machine. After encryption, 
 the query (comprising the encrypted bloom filters) is sent to the cloud for terms matching.
 
-On receiving a query, the CSP will match the incoming query with the index entries of 
+On receiving a query, the CSP matches the incoming query with the index entries of 
 the files it is hosting. For a perfect match, all of the corresponding bits of the index 
 and query bloom filters need to match. However, since both the query and the index
 bloom filters are encrypted, simple matching is not possible. Furthermore, encrypting the
@@ -157,7 +157,7 @@ privacy and security but makes matching difficult.
 
 Fortunately, homomorphic encryption provides a way to perform mathematical operations 
 over ciphertext. Since our bloom filter entries are encrypted using Pascal Paillier homomorphic
-encryption, we can just multiply their ciphertexts, which when decrypted, would yield the sum of
+encryption, we can just multiply their ciphertexts, which when decrypted, yields the sum of
 the plaintexts~\cite{pascal}. The sum of the bits will be either $0$,$1$ or $2$ after decryption.
 The twos in the decrypted output then represent the matched
 bits and the ones represent the unmatched bits. Then, a similarity score
@@ -281,7 +281,7 @@ With the increase of bloom filter size, the false positive rate decreases but th
 index entry increases. The indexing time also increases, mainly because it takes longer
 to upload a larger bloom filter to the cloud. 
 This increase in indexing time with increasing bloom filter size 
-is shown in Figure \ref{fig: bf-size-exe-time}
+is shown in Figure \ref{fig: bf-size-exe-time}.
 
  \begin{figure}
   \centering
@@ -358,7 +358,9 @@ queries. Due to the sliding window bloom filter approach,
 all of the metrics increase only linearly ($O(n)$) with the number
 of keywords on the server. This is substantially better than using a naive algorithm 
 for partial matching, which would result in $O(nm)$ time complexity 
-for $n$ keywords that are on average $m$ characters long.
+for $n$ keywords that are on average $m$ characters long. Crucially,
+privacy is preserved throughout the search process because data is never
+decrypted at the cloud or by any other untrusted system.
 
 We obtained these cost metrics from Google App Engine logs for each data point. In
 each log entry \emph{ms}, \emph{cpu\_ms} and \emph{cpm\_usd} depicts the wallclock response
